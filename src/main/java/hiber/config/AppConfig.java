@@ -18,7 +18,6 @@ import java.util.Properties;
 @EnableTransactionManagement
 @ComponentScan(value = "hiber")
 public class AppConfig {
-
    private final Environment env;
 
    @Autowired

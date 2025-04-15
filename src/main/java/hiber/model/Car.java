@@ -20,13 +20,13 @@ public class Car {
     @OneToOne(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
     private User user;
 
+    public Car() {
+
+    }
+
     public Car(String model, int series) {
         this.model = model;
         this.series = series;
-    }
-
-    public Car() {
-
     }
 
     public String getModel() {

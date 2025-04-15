@@ -35,10 +35,10 @@ public class UserDaoImp implements UserDao {
       query.setParameter("series", series);
 
       try {
+         if (query.getResultList().isEmpty()) {
+            throw new EntityNotFoundException("Пользователь не найден");
+         }
          return query.getSingleResult();
-      } catch (NoResultException e) {
-         System.out.println("Ошибка: Пользователь с машиной " + model + " " + series + " не найден.");
-         return null;
       } finally {
          session.close();
       }

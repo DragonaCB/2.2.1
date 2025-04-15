@@ -3,6 +3,8 @@ package hiber.model;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 
 @Entity
 @Table(name = "users")
@@ -28,17 +30,17 @@ public class User {
    public User() {
    }
 
+   public User(String firstName, String lastName, String email) {
+      this.firstName = firstName;
+      this.lastName = lastName;
+      this.email = email;
+   }
+
    public User(String firstName, String lastName, String email, Car car) {
       this.firstName = firstName;
       this.lastName = lastName;
       this.email = email;
       this.car = car;
-   }
-
-   public User(String firstName, String lastName, String email) {
-      this.firstName = firstName;
-      this.lastName = lastName;
-      this.email = email;
    }
 
    public Long getId() {
@@ -74,9 +76,6 @@ public class User {
    }
 
    public Car getCar() {
-      if (car == null) {
-         return null;
-      }
       return car;
    }
 
@@ -92,5 +91,17 @@ public class User {
               ", lastName='" + lastName + '\'' +
               ", email='" + email +
               '}';
+   }
+
+   @Override
+   public boolean equals(Object o) {
+      if (o == null || getClass() != o.getClass()) return false;
+      User user = (User) o;
+      return Objects.equals(id, user.id) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(email, user.email);
+   }
+
+   @Override
+   public int hashCode() {
+      return Objects.hash(id, firstName, lastName, email);
    }
 }
